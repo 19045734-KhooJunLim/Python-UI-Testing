@@ -15,7 +15,7 @@ class Helpme:
 
         
 
-    # How should I store the date?
+    
 
 
     # Defining a function that will get the details
