@@ -12,7 +12,7 @@ b2 = Button(root, text="Retrieve Something", height=10, width=20, command=None).
 
 # Delcaring variables to store details
 fname_var = tk.StringVar() #Finder name
-fid_var = tk.IntVar() #Finder ID
+fid_var = tk.StringVar() #Finder ID
 iname_var = tk.StringVar() #Item name
 itype_var = tk.StringVar() #Item type
 
