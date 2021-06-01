@@ -23,7 +23,7 @@ class Helpme:
     def input(self, method):
         # Delcaring variables to store details
         fname_var = tk.StringVar() #Finder name
-        fid_var = tk.IntVar() #Finder ID
+        fid_var = tk.StringVar() #Finder ID
         iname_var = tk.StringVar() #Item name
         itype_var = tk.StringVar() #Item type
         
