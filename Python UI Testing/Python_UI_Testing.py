@@ -1,109 +1,130 @@
-import argparse
 from tkinter import *
-import tkinter as tk
 
-class Helpme:
-    def __init__(self, master):
-        self.master = master
-        master.title('UI Test')
-        master.geometry('600x300')
-        self.found_button = Button(master, text="Found Something", height=10, width=20, command=lambda : input("found"))
-        self.retrieve_button = Button(master, text="Retrieve Something", height=10, width=20, command=lambda : input("retrieve"))
 
-        self.found_button.grid(row=2, column=1, padx=100, pady=50)
-        self.retrieve_button.grid(row=2, column=3, padx=25, pady=50)
-
+class App(Tk):
+    def __init__(self, *args, **kwargs):
+        Tk.__init__(self, *args, **kwargs)
         
-
-    # How should I store the date?
-
-
-    # Defining a function that will get the details
-    # and print them on the screen
-    def input(self, method):
-        # Delcaring variables to store details
-        fname_var = tk.StringVar() #Finder name
-        fid_var = tk.IntVar() #Finder ID
-        iname_var = tk.StringVar() #Item name
-        itype_var = tk.StringVar() #Item type
+        container = Frame(self)
+        container.pack(side="top", fill="both", expand=True)
+        container.grid_rowconfigure(0,weight=1)
+        container.grid_columnconfigure(0,weight=1)
         
-        if method == "found":
-            self.found_button.grid_forget()
-            self.retrieve_button.grid_forget()
-            self.fname_label = Label(root, text = 'Username', font=('calibre',10, 'bold'))
-            self.fname_entry = Entry(root,textvariable = fname_var, font=('calibre',10,'normal'))
-
-            self.fid_label = Label(root, text = 'ID', font=('calibre',10, 'bold'))
-            self.fid_entry = Entry(root,textvariable = fid_var, font=('calibre',10,'normal'))
-
-            self.iname_label = Label(root, text = 'Item name', font=('calibre',10, 'bold'))
-            self.iname_entry = Entry(root,textvariable = iname_var, font=('calibre',10,'normal'))
-
-            self.itype_label = Label(root, text = 'Item type', font=('calibre',10, 'bold'))
-            self.itype_entry = Entry(root,textvariable = itype_var, font=('calibre',10,'normal'))
-
-
-            # Creating a button using the widget
-            # Button that will call the submit function
-            self.sub_btn = Button(root,text = 'Submit', command=None)
-
-            # Placing the label and entry in the required position using grid method
-            self.fname_label.grid(row=0, column=0)
-            self.fname_entry.grid(row=0, column=1)
-
-            self.fid_label.grid(row=1, column=0)
-            self.fid_entry.grid(row=1, column=1)
-
-            self.iname_label.grid(row=2, column=0)
-            self.iname_entry.grid(row=2, column=1)
-
-            self.itype_label.grid(row=3, column=0)
-            self.itype_entry.grid(row=3, column=1)
-
-            # Creating a submit button
-            self.sub_btn.grid(row=4, column=1)
-        else:
-            self.found_button.grid_forget()
-            self.retrieve_button.grid_forget()
-            self.fname_label = tk.Label(root, text = 'Username', font=('calibre',10, 'bold'))
-            self.fname_entry = tk.Entry(root,textvariable = fname_var, font=('calibre',10,'normal'))
-
-            self.fid_label = tk.Label(root, text = 'ID', font=('calibre',10, 'bold'))
-            self.fid_entry = tk.Entry(root,textvariable = fid_var, font=('calibre',10,'normal'))
-
-            self.iname_label = tk.Label(root, text = 'Item name', font=('calibre',10, 'bold'))
-            self.iname_entry = tk.Entry(root,textvariable = iname_var, font=('calibre',10,'normal'))
-
-            self.itype_label = tk.Label(root, text = 'Item type', font=('calibre',10, 'bold'))
-            self.itype_entry = tk.Entry(root,textvariable = itype_var, font=('calibre',10,'normal'))
-
-
-            # Creating a button using the widget
-            # Button that will call the submit function
-            self.sub_btn = tk.Button(root,text = 'Submit', command = None)
-
-            # Placing the label and entry in the required position using grid method
-            self.fname_label.grid(row=0, column=0)
-            self.fname_entry.grid(row=0, column=1)
-
-            self.fid_label.grid(row=1, column=0)
-            self.fid_entry.grid(row=1, column=1)
-
-            self.iname_label.grid(row=2, column=0)
-            self.iname_entry.grid(row=2, column=1)
-
-            self.itype_label.grid(row=3, column=0)
-            self.itype_entry.grid(row=3, column=1)
-
-            # Creating a submit button
-            self.sub_btn.grid(row=4, column=1)
-
-    #def submit(self):
+        self.frames = {}
         
+        for F in (StartPage, PageOne, PageTwo,PageFour):
+            frame = F(container, self)
+            self.frames[F] = frame
+            frame.grid(row=0, column=0, sticky="NSEW")
+            
+            self.show_frame(StartPage)
+    def show_frame(self, context):
+        frame = self.frames[context]
+        frame.tkraise()
+            
+            
 
+#start page coding
+class StartPage(Frame):
+    def __init__(self, parent,controller):
+        Frame.__init__(self, parent)
+        
+        label = Label(self, text="Lost and Found")
+        label.pack(padx=10, pady=10)
+        
+        
+        button1 = Button(self, text="Lost",width=50, height=5,border=1, command=lambda:controller.show_frame(PageOne))
+        button1.pack()
+        button2= Button(self, text ="Found", width=50, height=5,border=1, command=lambda:controller.show_frame(PageTwo))
+        button2.pack()
+#Page 1
+class PageOne(Frame):
+    def __init__(self, parent,controller):
+        Frame.__init__(self, parent)
+        
+        label = Label(self, text="Page one")
+        label.pack(padx=10, pady=10)
+        OPTIONS = [
+            "select Option",
+            "Phone",
+            "Key",
+            "Wallet",
+            "Card",
+            
+                ]
+        master = self
+        variable = StringVar(master)
+        variable.set(OPTIONS[0]) # default value
 
+        w = OptionMenu(master, variable, *OPTIONS)
+        w.pack()
+        page_four= Button(self, text ="enter", command=lambda:controller.show_frame(PageFour))
+        Start_page= Button(self, text ="HomePage", command=lambda:controller.show_frame(StartPage))
+        page_four.pack()
+        Start_page.pack(side=BOTTOM)
+        Start_page.pack(side=RIGHT)
+         
 
+class PageTwo(Frame):
+    def __init__(self, parent,controller):
+        Frame.__init__(self, parent)
+        
+        label = Label(self, text="Found Item")
+        label.pack(padx=10, pady=10)
+        
+        place = Label(self,text="Place found")
+        place.pack(side=LEFT)
+        place_e = Entry(self)
+        place_e.pack(side=LEFT)
+        
+        item = Label(self,text="Item")
+        item.pack(side=LEFT)
+        item_e = Entry(self)
+        item_e.pack(side=LEFT)
+        
+        L1 = Label(self,text="Alalalalala")
+        L1.pack(side=LEFT)
+        E1 = Entry(self)
+        E1.pack(side=LEFT)
 
-root = tk.Tk()
-gui = Helpme(root)
-root.mainloop()
+        Start_page= Button(self, text ="HomePage", command=lambda:controller.show_frame(StartPage))
+        Start_page.pack(side=BOTTOM)
+        #Start_page.pack(side=RIGHT)
+
+class PageFour(Frame):
+    def __init__(self, parent,controller):
+        Frame.__init__(self, parent)
+        
+        label = Label(self, text="Page 4")
+        label.pack(padx=10, pady=10)
+        alist = ["00000001","00000002", "00000003"]
+        blist = ["Samsung S10", "Apple X", "Huawei Nova 7i"]
+        total = len(alist)
+        i = 0
+        listbox1 = Listbox(self)
+        listbox2 = Listbox(self)
+        scrollbar1 = Scrollbar(self)
+        scrollbar2 = Scrollbar(self)
+        scrollbar1.pack(side= LEFT, fill = BOTH)
+        scrollbar2.pack(side= RIGHT, fill = BOTH)
+        listbox1.pack(side = LEFT)
+        listbox2.pack (side = RIGHT)
+        for i in range(total):
+            listbox1.insert(END, alist[i])
+            listbox2.insert(END, blist[i])
+            i = i+1
+        listbox1.config(yscrollcommand = scrollbar1.set)
+        listbox2.config(yscrollcommand = scrollbar2.set)
+        
+        scrollbar1.config(command = listbox1.yview)
+        scrollbar2.config(command = listbox2.yview)
+        button1= Button(self, text ="HomePage", command=lambda:controller.show_frame(StartPage))
+        button1.pack(side=BOTTOM)
+
+       
+
+app = App()
+
+app.mainloop()
+        
+        
