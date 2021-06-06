@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from tkcalendar import *
 import pypyodbc
 conn = pypyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=(localdb)\\ProjectsV13; DATABASE=test; Trusted_Connection=Yes')
 
@@ -10,8 +11,8 @@ class Application(Tk):
         
         window=Frame(self)
         window.pack()
-        window.grid_rowconfigure(0, minsize=500)
-        window.grid_columnconfigure(0, minsize=800)
+        window.grid_rowconfigure(0, minsize=1000)
+        window.grid_columnconfigure(0, minsize=1500)
         self.T5 = StringVar()
         
 
@@ -128,20 +129,28 @@ class thirdPage_found(Frame):
         border.pack(fill="both", expand="yes",padx=150, pady=100)
         
         l1=Label(border, text="Full name",font=("Arial",15)).place(x=20, y=15)
-        T1=Entry(border, width =30, bd=5)
-        T1.place(x=200,y=15)
+        T1=Entry(border, width =50, bd=5)
+        T1.place(x=500,y=5)
         l2=Label(border, text="Contact Number",font=("Arial",15)).place(x=20, y=55)
-        T2=Entry(border, width =30, bd=5)
-        T2.place(x=200,y=55)
-        l3=Label(border, text="Item Found",font=("Arial",15)).place(x=20, y=105)
-        T3=Entry(border, width =30, bd=5)
-        T3.place(x=200,y=105)
-        l4=Label(border, text="Description",font=("Arial",15)).place(x=20, y=155)
-        T4=Entry(border, width =30, bd=5)
-        T4.place(x=200,y=155)
-        l5=Label(border, text="Location of the item",font=("Arial",15)).place(x=20, y=205)
-        T5=Entry(border, width =30, bd=5)
-        T5.place(x=200,y=205)
+        T2=Entry(border, width =50, bd=5)
+        T2.place(x=500,y=55)
+        l3=Label(border, text="Item Type Found",font=("Arial",15)).place(x=20, y=105)
+        T3=Entry(border, width =50, bd=5)
+        T3.place(x=500,y=105)
+        l4=Label(border, text="Item Description",font=("Arial",15)).place(x=20, y=155)
+        T4=Entry(border, width =50, bd=5)
+        T4.place(x=500,y=155)
+        l5=Label(border, text="Where did you find the item",font=("Arial",15)).place(x=20, y=205)
+        T5=Entry(border, width =50, bd=5)
+        T5.place(x=500,y=205)
+        l6=Label(border, text="Date",font=("Arial",15)).place(x=20, y=255)
+        T6 = Calendar(border, selectmode = 'day').place(x=500, y=255)
+        l7=Label(border, text="Height of item (If you know, else don't need)",font=("Arial",15)).place(x=20, y=445)
+        T7=Entry(border, width =50, bd=5).place(x=500,y=435)
+        l8=Label(border, text="Length of item (If you know, else don't need)",font=("Arial",15)).place(x=20, y=495)
+        T8=Entry(border, width =50, bd=5).place(x=500,y=485)
+        l9=Label(border, text="Width of item (If you know, else don't need)",font=("Arial",15)).place(x=20, y=545)
+        T9=Entry(border, width =50, bd=5).place(x=500,y=535)
         self.controller.T5.set(T5)
         
        
@@ -154,8 +163,8 @@ class thirdPage_found(Frame):
                 controller.show_frame(fourPage_found)
             
         
-        bHome=Button(self, text="Back",font=("Arial",15), command=lambda:controller.show_frame(firstPage)).place(x=100, y=450)
-        bNext=Button(self, text="Submit",font=("Arial",15), command=verify).place(x=600, y=450)
+        bHome=Button(self, text="Back",font=("Arial",15), command=lambda:controller.show_frame(firstPage)).place(x=200, y=900)
+        bNext=Button(self, text="Submit",font=("Arial",15), command=verify).place(x=900, y=900)
         
 
 #verify code check from database when user want to retr
