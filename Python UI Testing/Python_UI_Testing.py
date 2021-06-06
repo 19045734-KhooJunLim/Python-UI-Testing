@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+import pypyodbc
+conn = pypyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=(localdb)\\ProjectsV13; DATABASE=test; Trusted_Connection=Yes')
 
 class Application(Tk):
     def __init__(self, *args, **kwargs):
