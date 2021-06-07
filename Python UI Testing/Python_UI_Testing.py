@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkcalendar import *
 import pypyodbc
 conn = pypyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=(localdb)\\ProjectsV13; DATABASE=test; Trusted_Connection=Yes')
-cursor = conn.cursor();
+cursor = conn.cursor()
 
 class Application(Tk):
     def __init__(self, *args, **kwargs):
@@ -166,7 +166,7 @@ class thirdPage_found(Frame):
             if T1.get() == '' or T2.get() == '' or T3.get() == '' or T4.get() == '' or T5.get() == '' or T6.get() == '':
                 messagebox.showinfo("Error", "Please ensure all blanks have been filled!")
             else:
-
+                cursor.execute("INSERT INTO item({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})")
                 controller.show_frame(fourPage_found)
             
         
