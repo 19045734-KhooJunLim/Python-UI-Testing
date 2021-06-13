@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkcalendar import *
 import pypyodbc
 conn = pypyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=(localdb)\\ProjectsV13; DATABASE=test; Trusted_Connection=Yes')
-cursor = conn.cursor()
+cursor = conn.cursor();
 
 class Application(Tk):
     def __init__(self, *args, **kwargs):
@@ -81,11 +81,6 @@ class secondPage_lost(Frame):
         
        
         def entry_to_Int(value):
-
-            if value != int:
-                c = "failed"
-                return c
-            else:
                 a = []
                 b = ''
                 for i in value:
@@ -98,27 +93,19 @@ class secondPage_lost(Frame):
             
 
         def verify():
-            if T1.get() == '' or T2.get() == '' or T3.get() == '' or T4.get() == '' or T5.get() == '':
+            if T1.get() == '' or T2.get() == ''or T4.get() == '' or T5.get() == '':
                 messagebox.showinfo("Error", "Please ensure all blanks have been filled!")
             else:
                  z = entry_to_Int(T2.get())
-                 
-                 
-                 if z == "failed" :
+                 if type(z) != int:
                     messagebox.showinfo("Error", "Please only enter numbers")
-                    z = entry_to_Int(T2.get())
-                    
                  else: 
                      z = str(z)
-
                      if len(z) != 8:
                         messagebox.showinfo("Error", "Please enter your 8 digit number")
-
                      else:
-                        controller.show_frame(fourPage_found)
-            
-            
-            
+                        controller.show_frame(fivePage_lost)
+
         
         bHome = Button(self, text="Back",font=("Arial",15), command=lambda:controller.show_frame(firstPage)).place(x=200, y=900)
         bNext = Button(self, text="Submit",font=("Arial",15), command=verify).place(x=900, y=900)
