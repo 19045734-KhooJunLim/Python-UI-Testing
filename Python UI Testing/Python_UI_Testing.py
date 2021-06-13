@@ -12,13 +12,13 @@ class Application(Tk):
         
         window = Frame(self)
         window.pack()
-        window.grid_rowconfigure(0, minsize=1000)
-        window.grid_columnconfigure(0, minsize=1500)
+        window.grid_rowconfigure(0, minsize=500) #500 or 1000
+        window.grid_columnconfigure(0, minsize=800) #800 or 1500
         self.T5 = StringVar()
         
 
         self.frames = {}
-        for f in(firstPage, secondPage_lost, thirdPage_found, fourPage_found, fivePage_lost):
+        for f in(firstPage, secondPage_lost, thirdPage_found, fourPage_found, fivePage_lost, iphone, tab, mac, umbrella):
             frame = f(window, self)
             self.frames[f] = frame
             frame.grid(row=0, column=0,sticky="nsew")
@@ -107,8 +107,12 @@ class secondPage_lost(Frame):
                         controller.show_frame(fivePage_lost)
 
         
-        bHome = Button(self, text="Back",font=("Arial",15), command=lambda:controller.show_frame(firstPage)).place(x=200, y=900)
-        bNext = Button(self, text="Submit",font=("Arial",15), command=verify).place(x=900, y=900)
+        bHome = Button(self, text="Back",font=("Arial",15), command=lambda:controller.show_frame(firstPage)).place(x=100, y=450) #x=100, y=450 or x=200, y=900
+        bNext = Button(self, text="Submit",font=("Arial",15), command=verify).place(x=600, y=450) #x = 600, y=450 or x and y =900
+        b1 = Button(self, text="iPhone",font=("Arial",15), command=lambda:controller.show_frame(iphone)).place(x=200, y=450)
+        b2 = Button(self, text="Galaxy Tab",font=("Arial",15), command=lambda:controller.show_frame(tab)).place(x=280, y=450)
+        b3 = Button(self, text="Macbook",font=("Arial",15), command=lambda:controller.show_frame(mac)).place(x=400, y=450)
+        b4 = Button(self, text="Umbrella",font=("Arial",15), command=lambda:controller.show_frame(umbrella)).place(x=500, y=450)
         
         
 #claim found
@@ -180,16 +184,119 @@ class fourPage_found(Frame):
         
         bHome = Button(self, text="previous",font=("Arial",15), command=lambda:controller.show_frame(thirdPage_found))
         bHome.place(x=100, y=450)
+
 #give code to user who submit the LOST item
 class fivePage_lost(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
+        self.controller = controller
         l1 = Label(self, text="fifth",font=("Arial bold",30))
         l1.place(x=230, y=230)
+
+
+
         bHome = Button(self, text="previous",font=("Arial",15), command=lambda:controller.show_frame(firstPage))
         bHome.place(x=100, y=450)
         
         
+class iphone(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        self.controller = controller
+
+        border = LabelFrame(self, text="Display",bg="ivory",bd=10, font=("Arial",20))
+        border.pack(fill="both", expand="yes",padx=150, pady=100)
+
+        sql_query ="select * from item"
+        cursor.execute(sql_query)
+        details = cursor.fetchall()
+
+        for row in details:
+            
+            if row[2] == "iphone 12 red":
+                l1 = Label(border, text=row[1],font=("Arial",15)).place(x=50, y=25)
+                l2 = Label(border, text=row[2],font=("Arial",15)).place(x=50, y=50)
+                l3 = Label(border, text=row[7],font=("Arial",15)).place(x=50, y=75)
+        
+        bHome = Button(self, text="previous",font=("Arial",15), command=lambda:controller.show_frame(secondPage_lost))
+        bHome.place(x=100, y=450)
+
+
+class tab(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        self.controller = controller
+
+        border = LabelFrame(self, text="Display",bg="ivory",bd=10, font=("Arial",20))
+        border.pack(fill="both", expand="yes",padx=150, pady=100)
+
+
+        sql_query ="select * from item"
+        cursor.execute(sql_query)
+        details = cursor.fetchall()
+
+        for row in details:
+            if row[2] == "galaxy tab s7":
+                l1 = Label(border, text=row[1],font=("Arial",15)).place(x=50, y=25)
+                l2 = Label(border, text=row[2],font=("Arial",15)).place(x=50, y=50)
+                l3 = Label(border, text=row[7],font=("Arial",15)).place(x=50, y=75)
+        
+        
+        
+        bHome = Button(self, text="previous",font=("Arial",15), command=lambda:controller.show_frame(secondPage_lost))
+        bHome.place(x=100, y=450)
+
+
+
+class mac(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        self.controller = controller
+
+        border = LabelFrame(self, text="Display",bg="ivory",bd=10, font=("Arial",20))
+        border.pack(fill="both", expand="yes",padx=150, pady=100)
+
+
+        sql_query ="select * from item"
+        cursor.execute(sql_query)
+        details = cursor.fetchall()
+
+        for row in details:
+            if row[2] == "macbook pro 16 in":
+                l1 = Label(border, text=row[1],font=("Arial",15)).place(x=50, y=25)
+                l2 = Label(border, text=row[2],font=("Arial",15)).place(x=50, y=50)
+                l3 = Label(border, text=row[7],font=("Arial",15)).place(x=50, y=75)
+        
+        
+        
+        bHome = Button(self, text="previous",font=("Arial",15), command=lambda:controller.show_frame(secondPage_lost))
+        bHome.place(x=100, y=450)
+
+
+class umbrella(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        self.controller = controller
+
+        border = LabelFrame(self, text="Display",bg="ivory",bd=10, font=("Arial",20))
+        border.pack(fill="both", expand="yes",padx=150, pady=100)
+
+
+        sql_query ="select * from item"
+        cursor.execute(sql_query)
+        details = cursor.fetchall()
+
+        for row in details:
+            if row[2] == "umbrella (not collapsible)":
+                l1 = Label(border, text=row[1],font=("Arial",15)).place(x=50, y=25)
+                l2 = Label(border, text=row[2],font=("Arial",15)).place(x=50, y=50)
+                l3 = Label(border, text=row[7],font=("Arial",15)).place(x=50, y=75)
+
+        
+        
+        
+        bHome = Button(self, text="previous",font=("Arial",15), command=lambda:controller.show_frame(secondPage_lost))
+        bHome.place(x=100, y=450)
 
 app = Application()
 app.mainloop()
