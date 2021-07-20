@@ -12,8 +12,8 @@ class Application(Tk):
         
         window = Frame(self)
         window.pack()
-        window.grid_rowconfigure(0, minsize=500) #500 or 1000
-        window.grid_columnconfigure(0, minsize=800) #800 or 1500
+        window.grid_rowconfigure(0, minsize=1000) #500 or 1000
+        window.grid_columnconfigure(0, minsize=1500) #800 or 1500
         self.T5 = StringVar()
         
 
@@ -77,9 +77,12 @@ class secondPage_lost(Frame):
         l5 = Label(border, text="Where you lost it",font=("Arial",15)).place(x=20, y=215)
         T5 = Entry(border, width =30, bd=5)
         T5.place(x=200,y=215)
+        l6 = Label(border, text="Item Code (if available)",font=("Arial",15)).place(x=20, y=265)
+        T6 = Entry(border, width =30, bd=5).place(x=240,y=265)
         self.controller.T5.set(T5)
         
-       
+       #cursor.execute("Select item_desc, box_id FROM item Inner Join box ON item.box_id = box.box_id WHERE retrieve_code=T6")
+
         def entry_to_Int(value):
                 a = []
                 b = ''
@@ -193,7 +196,7 @@ class fivePage_lost(Frame):
         l1 = Label(self, text="fifth",font=("Arial bold",30))
         l1.place(x=230, y=230)
 
-
+        
 
         bHome = Button(self, text="previous",font=("Arial",15), command=lambda:controller.show_frame(firstPage))
         bHome.place(x=100, y=450)
