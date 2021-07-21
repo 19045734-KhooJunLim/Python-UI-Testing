@@ -12,8 +12,8 @@ class Application(Tk):
         
         window = Frame(self)
         window.pack()
-        window.grid_rowconfigure(0, minsize=500) #500 or 1000
-        window.grid_columnconfigure(0, minsize=800) #800 or 1500
+        window.grid_rowconfigure(0, minsize=500) #500 / 1000
+        window.grid_columnconfigure(0, minsize=800) #800 / 1500
         self.T5 = StringVar()
         
 
